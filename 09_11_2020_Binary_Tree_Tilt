@@ -1,0 +1,25 @@
+
+/*
+
+Traversal used - postorder DFS
+Keep track of the current maximum and current minimum in each level of the traversal and keep finding the absolute
+difference
+
+*/
+class Solution {
+public:
+    int result = 0;
+    void dfs(TreeNode* root,int cmin, int cmax){
+        if(root==NULL)
+            return;
+        result = max(result,max(abs(root->val - cmin),abs(root->val - cmax)));
+        cmax = max(cmax,root->val);
+        cmin = min(cmin,root->val);
+        dfs(root->left,cmin,cmax);
+        dfs(root->right,cmin,cmax);
+    }
+    int maxAncestorDiff(TreeNode* root) {
+        dfs(root,root->val,root->val);
+        return result;
+    }
+};
