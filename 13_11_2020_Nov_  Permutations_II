@@ -1,0 +1,26 @@
+/*
+
+ALGORITHM USED - BACK TRACKING THIS IS DONE 
+Data structure used - SET
+*/
+
+class Solution {
+public:
+    set<vector<int>> original;
+    void generate(int start, vector<int> nums){
+        if(start == nums.size())
+            original.insert(nums);
+        for(int i=start;i<nums.size();i++){
+            swap(nums[i],nums[start]);
+            generate(start+1, nums);
+            swap(nums[start],nums[i]);
+        }
+    }
+    vector<vector<int>> permuteUnique(vector<int>& nums) {   
+        vector<vector<int>> result;
+        generate(0,nums);
+        for(auto i:original)
+            result.push_back(i);
+        return result;
+    }
+};
