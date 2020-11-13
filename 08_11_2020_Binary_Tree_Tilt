@@ -1,0 +1,21 @@
+/*
+Approach used is that the abs difference of each of the left and right sub tree is calculated and stored. and while doing so, 
+adding the current root->val. then, returning the result.
+*/
+
+class Solution {
+public:
+    int result = 0;
+    int dfs(TreeNode* root){
+        if(root==NULL)
+            return 0;
+        int left = dfs(root->left);
+        int right = dfs(root->right);
+        result += abs(left - right);
+        return left + right + root->val;
+    }
+    int findTilt(TreeNode* root) {
+        dfs(root);
+        return result;
+    }
+};
