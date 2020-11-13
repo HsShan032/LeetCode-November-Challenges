@@ -1,0 +1,34 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ 
+ append each of the integers into the string then convert it into a integer and return it.
+ 
+ */
+class Solution {
+public:
+    int getInt(string n){
+        int dec_val = 0,base = 1;
+        for(int i=n.length()-1;i>=0;i--){
+            if(n[i]=='1')
+                dec_val += base;
+            base *= 2;
+        }
+        return dec_val;
+    }
+    int getDecimalValue(ListNode* head) {
+        string n;
+        while(head!=NULL){
+            n += to_string(head->val);
+            head = head->next;
+        }
+        //cout<<n;
+        return getInt(n);
+    }
+};
