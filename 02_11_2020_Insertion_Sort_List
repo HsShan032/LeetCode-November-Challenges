@@ -1,0 +1,35 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ While traversing find the least element of the current then append it next of the prev element.
+ 
+ 
+ */
+class Solution {
+public:
+    ListNode* insertionSortList(ListNode* head) {
+        ListNode *dummy = new ListNode(-1);
+        ListNode *curr=head, *prev, *next;
+        while(curr!=NULL){
+            ListNode *temp = curr->next;
+            prev = dummy;
+            next = dummy->next;
+            while(next != NULL){
+                if(next->val > curr->val)
+                    break;
+                prev = next;
+                next = next->next;
+            }
+            curr->next = next;
+            prev->next = curr;
+            curr = temp;
+        }
+        return dummy->next;
+    }
+};
