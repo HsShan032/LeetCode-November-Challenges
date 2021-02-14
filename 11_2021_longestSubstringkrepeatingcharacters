@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int longestSubstring(string s, int k) {
+        return f(s,0,s.size()-1,k);
+    }
+    int f(string &s, int low, int high, int k){
+        if(high - low + 1 < k){
+            return 0;
+        }
+        vector<int> freq(26,0);
+        for(int i=low;i<=high;i++){
+            freq[s[i]-'a']++;
+        }
+        int i = low,maxLen = 0;
+        for(int j=low; j<=high; j++){
+            if(freq[s[j]-'a'] < k){
+                maxLen = max(maxLen, f(s,i,j-1,k));
+                i = j + 1;
+            }
+        }
+        if(i==low){
+            return (high-low+1);
+        }
+        return max(maxLen,f(s,i,high,k));
+        
+    }
+};
