@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int uniqueMorseRepresentations(vector<string>& words) {
+        set<string> s;
+        vector<string> code{".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+        for(auto i:words){
+            string temp;
+            for(char c:i){
+                temp += code[c-'a'];
+            }
+            s.insert(temp);
+        }
+        return s.size();
+    }
+};
