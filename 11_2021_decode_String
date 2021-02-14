@@ -1,0 +1,17 @@
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stk = [["",1]]
+        num = ""
+        nums = [str(x) for x in range(10)]
+        for char in s:
+            if char in nums:
+                num += char
+            elif char == "[":
+                stk.append(["",int(num)])
+                num = ""
+            elif char == "]":
+                string_,k = stk.pop()
+                stk[-1][0] += string_ * k
+            else:
+                stk[-1][0] += char
+        return stk[-1][0]
